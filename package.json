@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Forta Bot that detects deployments of bots through Nethermind's address",
   "chainIds": [
-    1
+    137
   ],
   "scripts": {
     "build": "tsc",
@@ -25,7 +25,8 @@
     "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
-    "forta-agent": "^0.1.10"
+    "forta-agent": "^0.1.10",
+    "forta-agent-tools": "^3.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

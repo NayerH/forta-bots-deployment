@@ -5,10 +5,7 @@ import {
   FindingSeverity,
   FindingType,
 } from "forta-agent";
-
-const BOT_CREATE_FUNCTION_SIGNATURE : string = "function createAgent(uint256 agentId,address owner,string metadata,uint256[] chainIds)";
-const NETHERMIND_DEPLOYER_ADDRESS : string = "0x88dC3a2284FA62e0027d6D6B1fCfDd2141a143b8";
-const PROXY_CONTRACT_ADDRESS : string = "0x61447385B019187daa48e91c55c02AF1F1f3F863";
+import {BOT_CREATE_FUNCTION_SIGNATURE, NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS} from './constants';
 
 export function provideTransactionHandler(deployerAddress : string, proxyAddress: string, functionSignature: string): HandleTransaction {
   return async (txEvent: TransactionEvent): Promise<Finding[]> => {
@@ -32,7 +29,7 @@ export function provideTransactionHandler(deployerAddress : string, proxyAddress
             type: FindingType.Info,
             protocol: "polygon",
             metadata: {
-              agentId,
+              agentId: agentId.toString(),
               metadata,
             },
           })
