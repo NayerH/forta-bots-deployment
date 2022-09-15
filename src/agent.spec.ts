@@ -2,7 +2,6 @@ import { FindingType, FindingSeverity, Finding, HandleTransaction, TransactionEv
 import { TestTransactionEvent } from "forta-agent-tools/lib/test";
 import { createAddress } from "forta-agent-tools";
 import { Interface } from "ethers/lib/utils";
-import { BigNumber } from "ethers";
 import { BOT_CREATE_FUNCTION_SIGNATURE, NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS } from './constants';
 import agent from "./agent";
 
