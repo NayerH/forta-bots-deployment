@@ -3,10 +3,10 @@ import { TestTransactionEvent } from "forta-agent-tools/lib/test";
 import { createAddress } from "forta-agent-tools";
 import { Interface } from "ethers/lib/utils";
 import { BOT_CREATE_FUNCTION_SIGNATURE, NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS } from './constants';
-import agent from "./agent";
+import bot from "./agent";
 
 describe("Create-Bot Detection Bot", () => {
-  let handleTransaction: HandleTransaction = agent.handleTransaction;
+  let handleTransaction: HandleTransaction = bot.handleTransaction;
   let functionABI = new Interface([BOT_CREATE_FUNCTION_SIGNATURE]).getFunction("createAgent");
 
   it("returns empty findings if transaction is not involved with bot deployments", async () => {
