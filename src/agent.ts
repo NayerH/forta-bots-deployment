@@ -5,16 +5,18 @@ import {
   FindingSeverity,
   FindingType,
 } from "forta-agent";
-import {BOT_CREATE_FUNCTION_SIGNATURE, NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS} from './constants';
+import { createAddress } from "forta-agent-tools";
+import {BOT_CREATE_FUNCTION_ABI, NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS} from './constants';
 
-export function provideTransactionHandler(deployerAddress : string, proxyAddress: string, functionSignature: string): HandleTransaction {
+export function provideTransactionHandler(deployerAddress : string, proxyAddress: string, functionABI: string): HandleTransaction {
   return async (txEvent: TransactionEvent): Promise<Finding[]> => {
     const findings: Finding[] = [];
+    deployerAddress = createAddress(deployerAddress);
+    proxyAddress = createAddress(proxyAddress);
 
     if(txEvent.from != deployerAddress) return findings;
-    if(txEvent.to != proxyAddress) return findings;
 
-    const createBotFunctionCalls = txEvent.filterFunction(functionSignature, proxyAddress);
+    const createBotFunctionCalls = txEvent.filterFunction(functionABI, proxyAddress);
 
     createBotFunctionCalls.forEach((createBotFunctionCall) => {
 
@@ -42,5 +44,5 @@ export function provideTransactionHandler(deployerAddress : string, proxyAddress
 }
 
 export default {
-  handleTransaction : provideTransactionHandler(NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS, BOT_CREATE_FUNCTION_SIGNATURE),
+  handleTransaction : provideTransactionHandler(NETHERMIND_DEPLOYER_ADDRESS, PROXY_CONTRACT_ADDRESS, BOT_CREATE_FUNCTION_ABI),
 };
